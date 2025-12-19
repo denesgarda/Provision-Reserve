@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useEventStore } from '../hooks';
 import { createInventoryEvent, InventoryEventType, EventSource } from '../types';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useToolbarUndoRedo } from '../hooks';
 
 interface ToolbarProps {

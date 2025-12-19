@@ -1,4 +1,4 @@
-import { AnyEvent, Event } from '../types/events';
+import { AnyEvent } from '../types/events';
 
 /**
  * Represents an undo/redo action
