@@ -5,14 +5,20 @@ interface DatabaseDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onDatabaseConnected: (path: string) => void;
+  onDatabaseDisconnected?: () => void;
   initialPath?: string;
+  isConnected?: boolean;
+  currentPath?: string | null;
 }
 
 export function DatabaseDialog({
   isOpen,
   onClose,
   onDatabaseConnected,
-  initialPath = ''
+  onDatabaseDisconnected,
+  initialPath = '',
+  isConnected = false,
+  currentPath = null
 }: DatabaseDialogProps) {
   const [dbPath, setDbPath] = useState(initialPath);
   const [isConnecting, setIsConnecting] = useState(false);
@@ -76,9 +82,9 @@ export function DatabaseDialog({
 
   return (
     <div className="dialog-overlay">
-      <div className="dialog-content">
+      <div className={`dialog-content ${!isConnected ? 'auto-height' : ''}`}>
         <div className="dialog-header">
-          <h2>Select Database</h2>
+          <h2>{isConnected ? 'Database Settings' : 'Connect to Database'}</h2>
           <button
             className="dialog-close"
             onClick={onClose}
@@ -89,10 +95,37 @@ export function DatabaseDialog({
         </div>
 
         <div className="dialog-body">
-          <p>
-            Enter the path to your Provision Reserve database file. If the file doesn't exist,
-            it will be created. If it does exist, it will be validated and connected.
-          </p>
+          {isConnected ? (
+            <>
+              <div className="connection-status">
+                <div className="status-indicator connected">
+                  <span className="status-dot">●</span>
+                  Connected
+                </div>
+                <div className="current-database">
+                  <code>{currentPath}</code>
+                </div>
+              </div>
+
+              <div className="database-actions">
+                <h3>Database Actions</h3>
+                <button
+                  className="action-button danger disconnect"
+                  onClick={() => {
+                    onDatabaseDisconnected?.();
+                    onClose();
+                  }}
+                >
+                  Disconnect
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p>
+                Enter the path to your Provision Reserve database file. If the file doesn't exist,
+                it will be created. If it does exist, it will be validated and connected.
+              </p>
 
           <div className="input-group">
             <label htmlFor="db-path">Database Path:</label>
@@ -132,24 +165,28 @@ export function DatabaseDialog({
               {error}
             </div>
           )}
+            </>
+          )}
         </div>
 
-        <div className="dialog-footer">
-          <button
-            onClick={onClose}
-            disabled={isConnecting}
-            className="cancel-button"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleConnect}
-            disabled={isConnecting || !dbPath.trim()}
-            className="connect-button"
-          >
-            {isConnecting ? 'Connecting...' : 'Connect'}
-          </button>
-        </div>
+        {!isConnected && (
+          <div className="dialog-footer">
+            <button
+              onClick={onClose}
+              disabled={isConnecting}
+              className="cancel-button"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleConnect}
+              disabled={isConnecting || !dbPath.trim()}
+              className="connect-button"
+            >
+              {isConnecting ? 'Connecting...' : 'Connect'}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

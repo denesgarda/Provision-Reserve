@@ -1,83 +1,44 @@
 import { useState } from 'react';
-import { Toolbar, EventExample, DatabaseDialog } from "./components";
+import { TopBar } from "./components/TopBar";
+import { Sidebar } from "./components/Sidebar";
+import { MainView } from "./components/MainView";
+import { DatabaseDialog } from "./components/DatabaseDialog";
 import { useDatabase } from './hooks';
 import "./App.css";
 
 function App() {
-  const { isConnected, currentPath, connectToDatabase, disconnectDatabase, clearError, error } = useDatabase();
+  const [activeView, setActiveView] = useState("dashboard");
+  const { isConnected, currentPath, connectToDatabase, disconnectDatabase } = useDatabase();
   const [showDatabaseDialog, setShowDatabaseDialog] = useState(false);
 
   const handleDatabaseConnected = (path: string) => {
     connectToDatabase(path);
   };
 
-  const handleDisconnect = () => {
-    disconnectDatabase();
-    clearError();
+  const handleManageDatabases = () => {
+    setShowDatabaseDialog(true);
   };
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>Provision Reserve</h1>
-        <div className="header-actions">
-          {isConnected && currentPath && (
-            <div className="database-info">
-              <span className="database-path">{currentPath}</span>
-              <button
-                className="disconnect-button"
-                onClick={handleDisconnect}
-                title="Disconnect from database"
-              >
-                ✕
-              </button>
-            </div>
-          )}
-          <button
-            className="database-button"
-            onClick={() => setShowDatabaseDialog(true)}
-          >
-            {isConnected ? 'Change Database' : 'Select Database'}
-          </button>
-          {isConnected && <Toolbar />}
-        </div>
-      </header>
+    <div className="app-root">
+      <TopBar
+        databasePath={currentPath}
+        onManageDatabases={handleManageDatabases}
+      />
 
-      <main className="app-main">
-        {isConnected ? (
-          <EventExample />
-        ) : (
-          <div className="welcome-screen">
-            <h2>Welcome to Provision Reserve</h2>
-            <p>To get started, please select or create a database.</p>
-
-            {error && (
-              <div className="welcome-error">
-                <p><strong>Database Error:</strong> {error}</p>
-                <button
-                  className="clear-error-button"
-                  onClick={clearError}
-                >
-                  Dismiss
-                </button>
-              </div>
-            )}
-
-            <button
-              className="primary-button"
-              onClick={() => setShowDatabaseDialog(true)}
-            >
-              Select Database
-            </button>
-          </div>
-        )}
-      </main>
+      <div className="main-layout">
+        <Sidebar activeView={activeView} onSelect={setActiveView} disabled={!isConnected} />
+        <MainView view={activeView} isConnected={isConnected} onConnectClick={handleManageDatabases} />
+      </div>
 
       <DatabaseDialog
         isOpen={showDatabaseDialog}
         onClose={() => setShowDatabaseDialog(false)}
         onDatabaseConnected={handleDatabaseConnected}
+        onDatabaseDisconnected={disconnectDatabase}
         initialPath={currentPath || ''}
+        isConnected={isConnected}
+        currentPath={currentPath}
       />
     </div>
   );

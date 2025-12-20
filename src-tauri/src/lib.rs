@@ -1,6 +1,7 @@
 use std::fs;
 use std::path::Path;
-use rusqlite::{Connection, Result as SqlResult};
+use rusqlite::Connection;
+use tauri::{Manager, PhysicalSize};
 
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
@@ -84,6 +85,30 @@ pub fn run() {
             validate_database,
             get_app_data_dir
         ])
+        .setup(|app| {
+            let window = app.get_webview_window("main").unwrap();
+
+            // Get the monitor size
+            if let Ok(monitor) = window.current_monitor() {
+                if let Some(monitor) = monitor {
+                    let size = monitor.size();
+
+                    // Set window to 85% width and 100% height
+                    let new_width = (size.width as f64 * 0.85) as u32;
+                    let new_height = size.height;
+
+                    // Set minimum size to prevent it from being too small
+                    let min_width = 800;
+                    let min_height = 600;
+                    let final_width = new_width.max(min_width);
+                    let final_height = new_height.max(min_height);
+
+                    let _ = window.set_size(PhysicalSize::new(final_width, final_height));
+                }
+            }
+
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

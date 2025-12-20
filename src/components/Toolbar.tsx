@@ -2,16 +2,17 @@ import { useToolbarUndoRedo } from '../hooks';
 
 interface ToolbarProps {
   className?: string;
+  disabled?: boolean;
 }
 
-export function Toolbar({ className = '' }: ToolbarProps) {
+export function Toolbar({ className = '', disabled = false }: ToolbarProps) {
   const { canUndo, canRedo, undoDescription, redoDescription, handleUndo, handleRedo } = useToolbarUndoRedo();
 
   return (
     <div className={`toolbar ${className}`}>
       <button
         onClick={handleUndo}
-        disabled={!canUndo}
+        disabled={disabled || !canUndo}
         title={undoDescription || 'Undo'}
       >
         ↶ Undo
@@ -19,7 +20,7 @@ export function Toolbar({ className = '' }: ToolbarProps) {
 
       <button
         onClick={handleRedo}
-        disabled={!canRedo}
+        disabled={disabled || !canRedo}
         title={redoDescription || 'Redo'}
       >
         ↷ Redo
