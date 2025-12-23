@@ -28,11 +28,56 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 45px;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
   z-index: 1000;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 15px;
+}
+
+.inline-button {
+  background: none;
+  border: none;
+  padding: 0 15px;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  color: inherit;
+  vertical-align: middle;
+  /*transition: opacity 0.2s ease;*/
+  width: 24px;  
+  height: 24px; 
+  flex-shrink: 0; 
+}
+
+.inline-button img {
+  width: 16px;  /* Set specific image size */
+  height: 16px; /* Set specific image size */
+  object-fit: contain; /* Maintain aspect ratio */
+}
+
+.inline-button:hover {
+    opacity: 0.7;
+}
+
+.inline-button:active {
+    opacity: 0.5;
+}
+
+.inline-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.inline-button:disabled:hover {
+    opacity: 0.3; /* Prevent hover effect when disabled */
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
 }
