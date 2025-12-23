@@ -1,3 +1,13 @@
+import "./App.css";
+import { TopBar } from "./components/TopBar";
+
 export default function App() {
-  return <h1>Hi</h1>;
+  return (
+    <div>
+      <TopBar/>
+      <div style={{ paddingTop: '60px' }}>
+        {/* Your main content goes here */}
+      </div>
+    </div>
+  );
 }
