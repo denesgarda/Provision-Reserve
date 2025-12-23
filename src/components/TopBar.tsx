@@ -1,6 +1,9 @@
+import { useState } from "react";
 import arrowIcon from "../assets/arrow.png";
 
 export function TopBar() {
+    const [showDatabaseError, setShowDatabaseError] = useState(true);
+
     const handleRedo = () => {
         console.log("Redo clicked");
     }
@@ -13,7 +16,7 @@ export function TopBar() {
         <div className="top-bar">
             <button className="inline-button" onClick={handleUndo} disabled={true}><img src={arrowIcon} alt="undo" className="rotate-180"/></button>
             <button className="inline-button" onClick={handleRedo} disabled={true}><img src={arrowIcon} alt="redo" /></button>
-            <button className="standard-button-compact" style={{ marginLeft: 'auto' }}>No database connected</button>
+            <button className={`standard-button-compact ${showDatabaseError ? 'database-error' : ''}`} style={{ marginLeft: 'auto' }}>No database connected</button>
         </div>
     );
 }
