@@ -1,5 +1,5 @@
 :root {
-  font-family: Avenir, sans-serif;
+  font-family: /*Avenir, */sans-serif;
 
   color: #0f0f0f;
   background-color: #f6f6f6;
@@ -60,29 +60,86 @@
 
 /* END INLINE BUTTON*/
 
-/* BEGIN COMPACT STANDARD BUTTON*
+/* BEGIN STANDARD BUTTON */
 
-.standard-button-compact {
-  background-color: #f6f6f6;
+.standard-button {
+  appearance: none;
+  background-color: #ffffff;
   border: 1px solid #d1d5db;
   border-radius: 6px;
-  padding: 4px 12px;
-  font-size: 12px;
+
+  padding: 8px 14px;
+  min-height: 32px;
+
+  font-size: 14px;
   font-weight: 500;
-  color: #374151;
-  cursor: pointer;
-  transition: all 0.15s ease;
+  line-height: 1;
+
+  color: #111827;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 24px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  gap: 6px;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 80ms ease;
 }
 
-.standard-button-compact:hover {
-  background-color: #ffffff;
+.standard-button:hover {
+  background-color: #f9fafb;
   border-color: #9ca3af;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.standard-button:active {
+  background-color: #f3f4f6;
+  transform: translateY(1px);
+}
+
+.standard-button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px #3b82f6;
+}
+
+.standard-button:disabled {
+  background-color: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: default;
+}
+
+.standard-button {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.standard-button:hover {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* END STANDARD BUTTON */
+
+/* BEGIN COMPACT STANDARD BUTTON*/
+
+.standard-button.compact {
+  padding: 4px 10px;
+  min-height: 24px;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  border-radius: 5px;
+}
+
+.standard-button.compact:hover {
+  background-color: #f6f7f8;
 }
 
 .standard-button-compact:active {
@@ -106,12 +163,12 @@
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
-/ END COMPACT STANDARD BUTTON */
+/* END COMPACT STANDARD BUTTON */
 
-/*.database-error {
-  border-color: #ef4444 !important;
+.database-error {
+  border-color: #ffb1b1 !important;
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}*/
+}
 
 html,
 body,
@@ -137,6 +194,10 @@ body,
   border-bottom: 1px solid #ddd;
 }
 
+.tab-name {
+  padding-left: 10px;
+}
+
 .body {
   flex: 1;
   display: flex;
@@ -144,14 +205,104 @@ body,
 }
 
 .side-bar {
-  width: 200px; /* constant width */
+  width: 180px; /* constant width */
   flex-shrink: 0;
   overflow: hidden;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   border-right: 1px solid #ddd;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-view {
   flex: 1;
   overflow: auto;
+}
+
+.side-bar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.side-bar {
+  width: 180px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.side-bar-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-bar-section-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  padding: 0 16px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.side-bar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-bar {
+  width: 200px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background-color: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.side-bar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
+
+  background-color: #ffffff;
+  border: none; /* remove rounded border */
+
+  font-size: 14px;
+  font-weight: 500; 
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.side-bar-item:hover {
+  background-color: #f9fafb;
+}
+
+.side-bar-item.active {
+  background-color: #d2eea2; /* subtle accent for active item */
+  font-weight: 700;
+  color: #6d9c16;
+}
+
+.side-bar-item:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6;
 }
