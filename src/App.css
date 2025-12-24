@@ -297,9 +297,8 @@ body,
 }
 
 .side-bar-item.active {
-  background-color: #d2eea2; /* subtle accent for active item */
+  background-color: #f1f1f1; /* subtle accent for active item */
   font-weight: 700;
-  color: #6d9c16;
 }
 
 .side-bar-item:focus-visible {
