@@ -14,6 +14,12 @@
   -webkit-text-size-adjust: 100%;
 }
 
+html, body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
 .container {
   margin: 0;
   padding-top: 10vh;
@@ -173,4 +179,36 @@
 .database-error {
   border-color: #ef4444 !important;
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.app-content {
+  position: fixed;
+  top: 45px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+
+.side-bar {
+  position: fixed;
+  top: 45px;
+  left: 0;
+  width: 200px; /* Fixed sidebar width */
+  height: calc(100vh - 45px);
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+  /*overflow-y: auto; /* Allow scrolling if content is tall */
+}
+
+.main-view {
+  flex: 1;
+  margin-left: 200px;
+  padding: 30px;
+  background-color: #f6f6f6;
+  overflow-y: auto;
+  height: 100%;
+  box-sizing: border-box;
 }

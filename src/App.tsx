@@ -1,12 +1,15 @@
 import "./App.css";
+import { MainView } from "./components/MainView";
+import { SideBar } from "./components/Sidebar";
 import { TopBar } from "./components/TopBar";
 
 export default function App() {
   return (
     <div>
       <TopBar/>
-      <div style={{ paddingTop: '60px' }}>
-        {/* Your main content goes here */}
+      <div className="app-content">
+        <SideBar/>
+        <MainView/>
       </div>
     </div>
   );
