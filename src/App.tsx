@@ -13,7 +13,7 @@ export default function App() {
       <TopBar currentPage={currentPage} />
       <div className="body">
         <SideBar currentPage={currentPage} onPageChange={setCurrentPage}/>
-        <MainView/>
+        <MainView currentPage={currentPage}/>
       </div>
     </div>
   );
