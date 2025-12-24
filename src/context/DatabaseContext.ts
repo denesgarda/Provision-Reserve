@@ -1,8 +1,10 @@
+import { DatabaseService } from "@/services/databaseService";
 import { createContext, useContext } from "react";
 
 type DatabaseContextType = {
     databasePath: string | undefined;
     setDatabasePath: (path: string | undefined) => void;
+    databaseService: DatabaseService | undefined;
 }
 
 export const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined);

@@ -8,9 +8,10 @@ type TopBarProps = {
 }
 
 export function TopBar({currentPage}: TopBarProps) {
-    const { databasePath, setDatabasePath } = useDatabase();
+    const { databasePath, setDatabasePath, databaseService } = useDatabase();
     const [disableUndo, setDisableUndo] = useState(true);
     const [disableRedo, setDiableRedo] = useState(true);
+    const [isConnecting, setIsConnecting] = useState(false);
 
     const handleRedo = () => {
         console.log("Redo clicked");
@@ -20,11 +21,19 @@ export function TopBar({currentPage}: TopBarProps) {
         console.log("Undo clicked");
     }
 
-    const handleDatabase = () => {
+    const handleDatabase = async () => {
         if (databasePath !== undefined) {
             setDatabasePath(undefined);
         } else {
-            setDatabasePath("Users/denesgarda/Downloads/test.json");
+            setIsConnecting(true);
+            try {
+                const hardcodedPath = "Downloads/provision-reserve-database.json";
+                setDatabasePath(hardcodedPath);
+            } catch (error) {
+                console.error("Failed to register database:", error);
+            } finally {
+                setIsConnecting(false);
+            }
         }
     }
 
@@ -39,7 +48,7 @@ export function TopBar({currentPage}: TopBarProps) {
                     <h4>{getPageById(currentPage).label}</h4>
                 </div>
             )}
-            <button className={`standard-button compact ${databasePath === undefined ? 'database-error' : ''}`} onClick={handleDatabase} style={{ marginLeft: 'auto' }}>{databasePath === undefined ? 'No database connected' : 'Database settings'}</button>
+            <button className={`standard-button compact ${databasePath === undefined ? 'database-error' : ''}`} onClick={handleDatabase} disabled={isConnecting} style={{ marginLeft: 'auto' }}>{isConnecting ? 'Connecting...' : databasePath === undefined ? 'No database connected' : 'Database settings' }</button>
         </div>
     );
 }
