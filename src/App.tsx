@@ -7,10 +7,11 @@ import { useState } from "react";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>("dashboard");
+  const [databasePath, setDatabasePath] = useState("");
 
   return (
     <div className="app-root">
-      <TopBar currentPage={currentPage} />
+      <TopBar currentPage={currentPage} databasePath={databasePath} setDatabasePath={setDatabasePath}/>
       <div className="body">
         <SideBar currentPage={currentPage} onPageChange={setCurrentPage}/>
         <MainView currentPage={currentPage}/>

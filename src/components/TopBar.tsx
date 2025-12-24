@@ -4,10 +4,12 @@ import { getPageById, PageId } from "@/pages";
 
 type TopBarProps = {
     currentPage: PageId;
+    databasePath: string;
+    setDatabasePath: (path: string) => void;
 }
 
-export function TopBar({currentPage}: TopBarProps) {
-    const [showDatabaseError, setShowDatabaseError] = useState(true);
+export function TopBar({currentPage, databasePath, setDatabasePath}: TopBarProps) {
+    const databaseBlank = databasePath === "";
     const [disableUndo, setDisableUndo] = useState(true);
     const [disableRedo, setDiableRedo] = useState(true);
 
@@ -19,6 +21,14 @@ export function TopBar({currentPage}: TopBarProps) {
         console.log("Undo clicked");
     }
 
+    const handleDatabase = () => {
+        if (databaseBlank) {
+            setDatabasePath("Users/denesgarda/Downloads/test.json");
+        } else {
+            setDatabasePath("");
+        }
+    }
+
     return (
         <div className="top-bar">
             <div>
@@ -28,7 +38,7 @@ export function TopBar({currentPage}: TopBarProps) {
             <div className="tab-name">
                 <h4>{getPageById(currentPage).label}</h4>
             </div>
-            <button className={`standard-button compact ${showDatabaseError ? 'database-error' : ''}`} style={{ marginLeft: 'auto' }}>{showDatabaseError ? 'No database connected' : 'Database settings'}</button>
+            <button className={`standard-button compact ${databaseBlank ? 'database-error' : ''}`} onClick={handleDatabase} style={{ marginLeft: 'auto' }}>{databaseBlank ? 'No database connected' : 'Database settings'}</button>
         </div>
     );
 }
