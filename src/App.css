@@ -596,3 +596,152 @@ body,
   margin-bottom: 10px;
   border-bottom: 1px solid #d1d5db;
 }
+
+/* Dialog Styles */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.dialog {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dialog Size Variants */
+.dialog-sm {
+  max-width: 300px;
+  width: 90%;
+}
+
+.dialog-md {
+  max-width: 400px;
+  width: 90%;
+}
+
+.dialog-lg {
+  max-width: 600px;
+  width: 90%;
+}
+
+.dialog-xl {
+  max-width: 800px;
+  width: 90%;
+}
+
+.dialog-full {
+  max-width: 95vw;
+  width: 95vw;
+  height: 95vh;
+}
+
+/* Dialog Variant Styles */
+
+.dialog-warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.dialog-warning .dialog-header {
+  border-bottom-color: #fef3c7;
+  background-color: #fefce8;
+}
+
+.dialog-danger {
+  border-left: 4px solid #ef4444;
+}
+
+.dialog-danger .dialog-header {
+  border-bottom-color: #fecaca;
+  background-color: #fef2f2;
+}
+
+.dialog-success {
+  border-left: 4px solid #10b981;
+}
+
+.dialog-success .dialog-header {
+  border-bottom-color: #bbf7d0;
+  background-color: #f0fdf4;
+}
+
+.dialog-info {
+  border-left: 4px solid #3b82f6;
+}
+
+.dialog-info .dialog-header {
+  border-bottom-color: #bfdbfe;
+  background-color: #eff6ff;
+}
+
+/* Dialog Animations */
+@keyframes dialog-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-slide-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Dialog Header */
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Dialog Content */
+.dialog-content {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Dialog Footer */
+.dialog-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 16px 20px;
+  border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+/* Focus styles for accessibility */
+.dialog:focus {
+  outline: none;
+}
