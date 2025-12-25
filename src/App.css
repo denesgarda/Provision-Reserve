@@ -389,3 +389,200 @@ body,
   border-radius: 4px;
   border: 1px solid #ddd
 }
+
+/* Add these styles to your existing App.css */
+
+/* Searchable Dropdown Styles */
+.searchable-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-trigger {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 2px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.dropdown-trigger:hover {
+  border-color: #9ca3af;
+}
+
+.dropdown-trigger:focus-within {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #3b82f6;
+}
+
+.dropdown-display {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.dropdown-text {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.dropdown-search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  background: transparent;
+  line-height: 1;
+}
+
+.dropdown-search-input::placeholder {
+  color: #9ca3af;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+
+.sort-options {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sort-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.sort-button {
+  appearance: none;
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 10px;
+  min-height: 28px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.sort-button:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+  color: #374151;
+}
+
+.sort-button.active {
+  background-color: #dbeafe;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+.dropdown-options {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.dropdown-option {
+  padding: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  transition: background-color 120ms ease;
+  border-radius: 4px;
+  margin: 2px 4px;
+}
+
+.dropdown-option:hover,
+.dropdown-option.selected {
+  background-color: #f9fafb;
+}
+
+.create-new-option {
+  border-top: 1px solid #e5e7eb;
+  font-style: italic;
+  color: #3b82f6;
+  margin-top: 4px;
+  padding-top: 16px;
+}
+
+.create-new-option:hover {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.dropdown-no-results {
+  padding: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Scrollbar styling for dropdown */
+.dropdown-options::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dropdown-options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown-options::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.dropdown-options::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Create New Dialog Styles */
+.create-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+.create-dialog {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  max-width: 400px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
