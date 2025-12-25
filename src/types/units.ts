@@ -19,6 +19,7 @@ export const Units = {
   // Weight/Mass
   MICROGRAM: "mcg",
   MILLIGRAM: "mg",
+  DECAGRAM: "dg",
   GRAM: "g",
   KILOGRAM: "kg",
   OUNCE: "oz",
