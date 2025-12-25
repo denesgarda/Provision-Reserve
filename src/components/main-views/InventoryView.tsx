@@ -27,6 +27,12 @@ export function InventoryView() {
         return genericVariants;
     }
 
+    const getVariantInfo = (variantId: string) => {
+        const instances = itemInstances?.filter(i => i.variantId === variantId) || [];
+        return {
+            instances: instances.length
+        };
+    }
     return (
         <div>
             {generics?.map((generic: Generic) => {
@@ -56,10 +62,15 @@ export function InventoryView() {
                             <div className="generic-dropdown">
                                 {variants.length > 0 ? (
                                     variants.map((variant) => {
+                                        const variantInfo = getVariantInfo(variant.id);
+
                                         return (
                                             <div key={variant.id} className="variant-listed">
                                                 <p style={{ margin: '4px 0', fontSize: '14px' }}>
                                                     {variant?.name || 'Unknown variant'}
+                                                </p>
+                                                <p>
+                                                    {variantInfo.instances} ct.
                                                 </p>
                                             </div>
                                         );
