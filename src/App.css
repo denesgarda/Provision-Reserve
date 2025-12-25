@@ -340,3 +340,37 @@ body,
 .generic-listed p {
   margin: 4px;
 }
+
+.generic-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-arrow {
+  padding: 5px;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+  fill: #9ca3af; /* Set the arrow color */
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.generic-dropdown {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.variant-listed {
+  background-color: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  border-width: 1px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+}
