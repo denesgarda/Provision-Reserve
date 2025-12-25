@@ -107,6 +107,11 @@ export function InventoryView() {
 
     return (
         <div>
+            <div className="inventory-header">
+                <button className="standard-button primary">
+                    Add Item
+                </button>
+            </div>
             {generics?.filter((generic: Generic) => displayGeneric(generic.id)).map((generic: Generic) => {
                 const isOpen = openDropdowns.has(generic.id);
                 const variants = getVariantsForGeneric(generic.id).filter(variant => displayVariant(variant.id));
