@@ -14,8 +14,22 @@ export class AppController {
         this.cursor = -1;
     }
 
-    setPath(path: string) {
+    connect(path: string) {
         this.adapter = new JSONFileStore(path);
+        this.eventCache = [];
+        this.cursor = -1;
+        this.onStateChange?.();
+    }
+
+    disconnect() {
+        this.adapter = undefined;
+        this.eventCache = [];
+        this.cursor = -1;
+        this.onStateChange?.();
+    }
+
+    get isConnected(): boolean { 
+        return this.adapter !== undefined; 
     }
 
     get canUndo(): boolean {
@@ -36,6 +50,7 @@ export class AppController {
             this.eventCache.splice(this.cursor + 1);
             this.eventCache.push(event);
             this.cursor++;
+            this.onStateChange?.();
         }
     }
 
@@ -47,6 +62,7 @@ export class AppController {
             const updated = this.eventCache[this.cursor].undo(db);
             this.adapter.save(updated);
             this.cursor--;
+            this.onStateChange?.();
         }
     }
 
@@ -58,6 +74,7 @@ export class AppController {
             const updated = this.eventCache[this.cursor + 1].apply(db);
             this.adapter.save(updated);
             this.cursor++;
+            this.onStateChange?.();
         }
     }
 }

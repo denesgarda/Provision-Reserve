@@ -2,9 +2,10 @@ import { AppController } from "@/core/connect/AppController";
 import { createContext, useContext } from "react";
 
 type DatabaseContextType = {
-    databasePath: string | undefined;
-    setDatabasePath: (path: string | undefined) => void;
     appController: AppController;
+    isConnected: boolean;
+    canUndo: boolean;
+    canRedo: boolean;
 }
 
 export const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined);

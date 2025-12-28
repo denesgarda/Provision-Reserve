@@ -14,17 +14,25 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>("dashboard");
-  const [databasePath, setDatabasePath] = useState<string | undefined>(undefined);
   const [appController] = useState(() => new AppController());
+  const [isConnected, setIsConnected] = useState(false);
+  const [canUndo, setCanUndo] = useState(false);
+  const [canRedo, setCanRedo] = useState(false);
 
   useEffect(() => {
-    if (databasePath) {
-      appController.setPath(databasePath);
+    appController.onStateChange = () => {
+      setIsConnected(appController.isConnected);
+      setCanUndo(appController.canUndo);
+      setCanRedo(appController.canRedo);
     }
-  }, [databasePath]);
+
+    setIsConnected(appController.isConnected);
+    setCanUndo(appController.canUndo);
+    setCanRedo(appController.canRedo);
+  }, [appController]);
 
   return (
-    <DatabaseContext.Provider value={{ databasePath, setDatabasePath, appController}}>
+    <DatabaseContext.Provider value={{ appController, isConnected, canUndo, canRedo }}>
       <div className="app-root">
         <TopBar currentPage={currentPage}/>
         <button onClick={() => {
