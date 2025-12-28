@@ -8,18 +8,8 @@ type TopBarProps = {
 }
 
 export function TopBar({currentPage}: TopBarProps) {
-    const { databasePath, setDatabasePath, databaseService } = useDatabase();
-    const [disableUndo, setDisableUndo] = useState(true);
-    const [disableRedo, setDiableRedo] = useState(true);
+    const { databasePath, setDatabasePath, appController } = useDatabase();
     const [isConnecting, setIsConnecting] = useState(false);
-
-    const handleRedo = () => {
-        console.log("Redo clicked");
-    }
-
-    const handleUndo = () => {
-        console.log("Undo clicked");
-    }
 
     const handleDatabase = async () => {
         if (databasePath !== undefined) {
@@ -27,7 +17,7 @@ export function TopBar({currentPage}: TopBarProps) {
         } else {
             setIsConnecting(true);
             try {
-                const hardcodedPath = "Downloads/provision-reserve-database.json";
+                const hardcodedPath = "Downloads/provision-reserve-databas.json";
                 setDatabasePath(hardcodedPath);
             } catch (error) {
                 console.error("Failed to register database:", error);
@@ -40,8 +30,8 @@ export function TopBar({currentPage}: TopBarProps) {
     return (
         <div className="top-bar">
             <div>
-                <button className="inline-button" onClick={handleUndo} disabled={disableUndo}><img src={arrowIcon} alt="undo" className="rotate-180"/></button>
-                <button className="inline-button" onClick={handleRedo} disabled={disableRedo}><img src={arrowIcon} alt="redo" /></button>
+                <button className="inline-button" onClick={() => {appController.undo()}} disabled={false}><img src={arrowIcon} alt="undo" className="rotate-180"/></button>
+                <button className="inline-button" onClick={() => {appController.redo()}} disabled={false}><img src={arrowIcon} alt="redo" /></button>
             </div>
             <button className={`standard-button compact ${databasePath === undefined ? 'database-error' : ''}`} onClick={handleDatabase} disabled={isConnecting} style={{ marginLeft: 'auto' }}>{isConnecting ? 'Connecting...' : databasePath === undefined ? 'No database connected' : 'Database settings' }</button>
         </div>

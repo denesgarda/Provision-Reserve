@@ -1,11 +1,9 @@
-import { Unit } from "./units";
-import { VariantId } from "./ids";
-import { GenericId } from "./ids";
-import { StorageState } from "./states";
+import { StorageState } from "../types/states";
+import { Unit } from "../types/units";
 
 export type Variant = {
-    readonly id: VariantId;
-    readonly genericId: GenericId;
+    readonly id: string;
+    readonly genericId: string;
     readonly name: string;
     readonly size: number;
     readonly unit: Unit;
@@ -13,5 +11,4 @@ export type Variant = {
     readonly defaultOpenedShelfLife: number;
     readonly purchaseState: StorageState;
     isPreferencePermanent: boolean;
-    upc?: string;
 }

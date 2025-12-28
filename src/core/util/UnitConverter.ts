@@ -1,4 +1,4 @@
-import { Unit, Units } from "@/types";
+import { Unit, Units } from "../types/units";
 
 const BASE_UNTIS = {
     COUNT: Units.COUNT,
