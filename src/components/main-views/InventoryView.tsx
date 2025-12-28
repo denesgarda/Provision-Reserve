@@ -1,14 +1,17 @@
 import { useDatabase } from "@/context/DatabaseContext"
-import { Generic } from "@/types";
 import { useState } from "react";
 import dropdownArrow from "@/assets/icons/dropdown-arrow.svg";
 import { QuantityUnitPair, UnitConverter } from "@/utils/unitConversion";
 
 export function InventoryView() {
-    const databaseService = useDatabase().databaseService;
+    const appController = useDatabase().appController;
     const [ openDropdowns, setOpenDropdowns ] = useState<Set<string>>(new Set());
 
-    const data = databaseService?.getData();
+    return (
+        <h1>Hello</h1>
+    )
+
+    /*const data = databaseService?.getData();
     const generics = data?.generics;
     const variants = data?.variants;
     const itemInstances = data?.itemInstances;
@@ -182,5 +185,5 @@ export function InventoryView() {
                 )
             })}
         </div>
-    )
+    )*/
 }

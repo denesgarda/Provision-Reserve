@@ -8,7 +8,7 @@ type sideBarProps = {
 }
 
 export function SideBar({currentPage, onPageChange}: sideBarProps) {
-    const databasePath = useDatabase().databasePath;
+    const isConnect = useDatabase().isConnected
     return (
         <div className="side-bar">
             <nav className="side-bar-nav">
@@ -17,7 +17,7 @@ export function SideBar({currentPage, onPageChange}: sideBarProps) {
             key={page.id}
             className={`side-bar-item ${currentPage === page.id ? "active" : ""}`}
             onClick={() =>  onPageChange(page.id)}
-            disabled={databasePath === undefined ? true : false}
+            disabled={isConnect ? false : true}
           >
             <span className="side-bar-item-label">{page.label}</span>
           </button>

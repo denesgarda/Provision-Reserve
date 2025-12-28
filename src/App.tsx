@@ -11,6 +11,8 @@ import { Category } from "./core/categories/Category";
 import { Location } from "./core/locations/Location";
 import { Units } from "./core/types/units";
 import { v4 as uuidv4 } from "uuid";
+import { SideBar } from "./components/SideBar";
+import { MainView } from "./components/MainView";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>("dashboard");
@@ -31,7 +33,7 @@ export default function App() {
     setCanRedo(appController.canRedo);
   }, [appController]);
 
-  return (
+  /*return (
     <DatabaseContext.Provider value={{ appController, isConnected, canUndo, canRedo }}>
       <div className="app-root">
         <TopBar currentPage={currentPage}/>
@@ -92,9 +94,9 @@ export default function App() {
         </button>
       </div>
     </DatabaseContext.Provider>
-  )
-  /*return (
-    <DatabaseContext.Provider value={{ databasePath, setDatabasePath, databaseService }}>
+  )*/
+  return (
+    <DatabaseContext.Provider value={{ appController, isConnected, canUndo, canRedo }}>
       <div className="app-root">
         <TopBar currentPage={currentPage}/>
         <div className="body">
@@ -103,5 +105,5 @@ export default function App() {
         </div>
       </div>
     </DatabaseContext.Provider>
-  );*/
+  );
 }

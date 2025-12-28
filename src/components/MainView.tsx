@@ -19,9 +19,9 @@ const PAGE_VIEW_MAP: Record<PageId, React.ComponentType> = {
 }
 
 export function MainView({currentPage}: MainViewProps) {
-    const databasePath = useDatabase().databasePath;
+    const isConnected = useDatabase().isConnected;
     const ViewComponent = PAGE_VIEW_MAP[currentPage];
-    if (databasePath === undefined) {
+    if (!isConnected) {
         return (
             <div className="main-view">
                 <div style={{ 
