@@ -1,8 +1,10 @@
 import { AppController } from "@/core/connect/AppController";
+import { Database } from "@/core/database/Database";
 import { createContext, useContext } from "react";
 
 type DatabaseContextType = {
     appController: AppController;
+    database: Database | undefined;
     isConnected: boolean;
     canUndo: boolean;
     canRedo: boolean;

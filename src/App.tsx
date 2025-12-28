@@ -20,17 +20,22 @@ export default function App() {
   const [isConnected, setIsConnected] = useState(false);
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
+  const [database, setDatabase] = useState<Database | undefined>(undefined);
 
   useEffect(() => {
     appController.onStateChange = () => {
       setIsConnected(appController.isConnected);
       setCanUndo(appController.canUndo);
       setCanRedo(appController.canRedo);
+      appController.getDatabase()
+        .then(db => setDatabase(db))
+        .catch(() => setDatabase(undefined));
     }
 
     setIsConnected(appController.isConnected);
     setCanUndo(appController.canUndo);
     setCanRedo(appController.canRedo);
+    appController.getDatabase().then(db => setDatabase(db)).catch(() => setDatabase(undefined));
   }, [appController]);
 
   /*return (
@@ -96,7 +101,7 @@ export default function App() {
     </DatabaseContext.Provider>
   )*/
   return (
-    <DatabaseContext.Provider value={{ appController, isConnected, canUndo, canRedo }}>
+    <DatabaseContext.Provider value={{ appController, database, isConnected, canUndo, canRedo }}>
       <div className="app-root">
         <TopBar currentPage={currentPage}/>
         <div className="body">

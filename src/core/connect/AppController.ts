@@ -1,4 +1,5 @@
 import { DatabaseAdapter } from "../adapters/DatabaseAdapter";
+import { Database } from "../database/Database";
 import { DomainEvent } from "../event/DomainEvent";
 import { JSONFileStore } from "./JSONFileStore";
 
@@ -28,6 +29,13 @@ export class AppController {
         this.onStateChange?.();
     }
 
+    async getDatabase(): Promise<Database> {
+        if (this.adapter === undefined) {
+            throw new Error("Database not connected");
+        }
+        return await this.adapter.load();
+    }
+
     get isConnected(): boolean { 
         return this.adapter !== undefined; 
     }
@@ -46,7 +54,7 @@ export class AppController {
         } else {
             const db = await this.adapter.load();
             const updated = event.apply(db);
-            this.adapter.save(updated);
+            await this.adapter.save(updated);
             this.eventCache.splice(this.cursor + 1);
             this.eventCache.push(event);
             this.cursor++;
@@ -60,7 +68,7 @@ export class AppController {
         } else {
             const db = await this.adapter.load();
             const updated = this.eventCache[this.cursor].undo(db);
-            this.adapter.save(updated);
+            await this.adapter.save(updated);
             this.cursor--;
             this.onStateChange?.();
         }
@@ -72,7 +80,7 @@ export class AppController {
         } else {
             const db = await this.adapter.load();
             const updated = this.eventCache[this.cursor + 1].apply(db);
-            this.adapter.save(updated);
+            await this.adapter.save(updated);
             this.cursor++;
             this.onStateChange?.();
         }
